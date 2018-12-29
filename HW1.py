@@ -34,17 +34,16 @@ for x in f.readline().strip().split('\t'):
 #算出Xi的總和----------------------------------------------------------
 #K=200 #200種可能
 X = numpy.random.randint(0,21,size=(n,1))
-print(X)
+#print(X)
 X_sum = numpy.zeros((1,1),int)
 j = 0
 for j in range(n):
     X_sum = X_sum + X[j]
-print(X_sum)
+#print(X_sum)
 
 
 #Xi總和的限制式--------------------------------------------------------
-#count=0
-while(X_sum!=h):
+while(X_sum > h):
     point=0 #見HW_help1
     for i in range(n): #X.size=10
         if( X[point] < X[i] ):
@@ -56,30 +55,24 @@ while(X_sum!=h):
     X_sum = 0
     for j in range(n):
         X_sum = X_sum + X[j]
-    #count = count + 1
-print(X)
-print(X_sum)
-        
-'''        
-        rank_X = sorted(X,revers = True)  #由大到小排
-        rank_X[0] = 50 - (X_sum - rank_X[0])  #把最大的換掉
-        if(rank_X[0] < 0):  #若不夠減，減第二大,第三大的
-            rank_X = sorted(X,revers = True)
-            rank_X[0] = 50 - (X_sum - rank_X[0])
-        else:
-            print(X_sum)
-    
-    for j in range(n):
-        X[j] = numpy.random.randint(0,21)
-    #print(X)
-    j = 0
+#print(X)
+#print(X_sum)
+
+while(X_sum < h):
+    point=0 #見HW_help1
+    for i in range(n): #X.size=10
+        if( X[point] > X[i] ):
+            point = i #做位置紀錄，可以找到最小值的位置
+    print("The smallest value", X[point], "is in the position",point)
+    X[point] = X[point] + (50 - X_sum)
+    if(X[point] > 20):
+        X[point] = 20
+    X_sum = 0
     for j in range(n):
         X_sum = X_sum + X[j]
-    #print(X_sum)
-'''
-
-
-
+#print(X)
+#print(X_sum)
+        
 #HW1-------------------------------------------------------------------   
 """
 Ite=50
