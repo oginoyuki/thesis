@@ -41,22 +41,26 @@ for j in range(n):
     X_sum = X_sum + X[j]
 print(X_sum)
 
-'''
+
 #Xi總和的限制式--------------------------------------------------------
+#count=0
 while(X_sum!=h):
+    point=0 #見HW_help1
+    for i in range(n): #X.size=10
+        if( X[point] < X[i] ):
+            point = i #做位置紀錄，可以找到最大值的位置
+    print("The largest value", X[point], "is in the position",point)
+    X[point] = 50 - (X_sum - X[point])
+    if(X[point] < 0):
+        X[point] = 0
+    X_sum = 0
     for j in range(n):
-        point=0 #見HW_help1
-        for i in range(1,X.size,1):#Y.size=10
-            if( X[point] < X[i] ):
-                point = i #做位置紀錄，可以找到最大值的位置
-        #print("The largest value", X[point], "is in the position",point)
-                X[point] = 50 - (X_sum - X[point])
-                if(X[point] < 0):
-                    X[point] == 0
+        X_sum = X_sum + X[j]
+    #count = count + 1
 print(X)
 print(X_sum)
         
-        
+'''        
         rank_X = sorted(X,revers = True)  #由大到小排
         rank_X[0] = 50 - (X_sum - rank_X[0])  #把最大的換掉
         if(rank_X[0] < 0):  #若不夠減，減第二大,第三大的
