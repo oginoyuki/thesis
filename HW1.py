@@ -41,38 +41,57 @@ for j in range(n):
     X_sum = X_sum + X[j]
 #print(X_sum)
 
-
-#Xi總和的限制式--------------------------------------------------------
+#Xi總和的限制式-----------------------------------------------------------
 while(X_sum > h):
     point=0 #見HW_help1
     for i in range(n): #X.size=10
         if( X[point] < X[i] ):
             point = i #做位置紀錄，可以找到最大值的位置
-    print("The largest value", X[point], "is in the position",point)
+    #print("The largest value", X[point], "is in the position",point)
     X[point] = 50 - (X_sum - X[point])
     if(X[point] < 0):
         X[point] = 0
     X_sum = 0
     for j in range(n):
         X_sum = X_sum + X[j]
+    mux_sum = numpy.zeros((1,1),float) #算出uiXi的總和------------------------
+    for j in range(n):
+        mux_sum = mux_sum + (mu[j] * X[j])
+    while(mux_sum < rho): #uixi總和的限制式
+        X = numpy.random.randint(0,21,size=(n,1))
+        X_sum = numpy.zeros((1,1),int)
+        j = 0
+        for j in range(n):
+            X_sum = X_sum + X[j]
 #print(X)
 #print(X_sum)
+#print(mux_sum)
 
 while(X_sum < h):
     point=0 #見HW_help1
     for i in range(n): #X.size=10
         if( X[point] > X[i] ):
             point = i #做位置紀錄，可以找到最小值的位置
-    print("The smallest value", X[point], "is in the position",point)
+    #print("The smallest value", X[point], "is in the position",point)
     X[point] = X[point] + (50 - X_sum)
     if(X[point] > 20):
         X[point] = 20
     X_sum = 0
     for j in range(n):
         X_sum = X_sum + X[j]
+    mux_sum = numpy.zeros((1,1),float) #算出uiXi的總和------------------------
+    for j in range(n):
+        mux_sum = mux_sum + (mu[j] * X[j])
+    while(mux_sum < rho): #uixi總和的限制式
+        X = numpy.random.randint(0,21,size=(n,1))
+        X_sum = numpy.zeros((1,1),int)
+        j = 0
+        for j in range(n):
+            X_sum = X_sum + X[j]
 #print(X)
 #print(X_sum)
-        
+#print(mux_sum)   
+
 #HW1-------------------------------------------------------------------   
 """
 Ite=50
