@@ -32,7 +32,7 @@ for x in f.readline().strip().split('\t'):
     j = j + 1
 
 #算出Xi的總和----------------------------------------------------------
-K=400 #200種可能
+K=200 #200種可能
 X = numpy.random.randint(0,21,size=(K,n))
 #print(X)
 X_sum = [0]*K
