@@ -9,20 +9,20 @@ import numpy as np
 from gurobipy import *
 
 try:
-    #Create a new Model
-    no_input_factors=2; #sigma, mu
-    no_output_factors=1; #x
-    no_units=10;
-    M = Model('Bonus_1') #自己給定模型名稱
-    
     f = open('dataset_Bonus_1.txt')
     n = int(f.readline())
     m = int(f.readline())
     h = int(f.readline())
     rho = float(f.readline())
     #print(n, m, h, rho)
+    #Create a new Model
+    no_input_factors=2; #sigma, mu
+    no_output_factors=1; #x
+    no_units=10;
+    M = Model('Bonus_1') #自己給定模型名稱
+    
     #把sigma讀進來---------------------------------------------------------
-    sigma = numpy.zeros((n,n),float)
+    sigma = np.zeros((n,n),float)
     for i in range(n):
         j=0
         for x in f.readline().strip().split('\t'):
@@ -30,7 +30,7 @@ try:
             #print('sigma[i][j]=',sigma[i][j])
             j = j + 1
     #把mu讀進來------------------------------------------------------------ 
-    mu = numpy.zeros((n),float)
+    mu = np.zeros((n),float)
     j = 0
     for x in f.readline().strip().split('\t'):
         mu[j] = float(x)
@@ -38,14 +38,14 @@ try:
         j = j + 1
    
     #Create variables
-    X = M.addVar(vtype=GRB.BINARY,name="X")
-
+    X = M.addVars(no_units, vtype=GRB.BINARY, name="X")
+    #print(type(X))
     #Integrate new variables
     M.update()
     #Set objective MINIMIZE 算目標式
     obj = 0
     for i in range(n):
-        j = 0
+        j=0
         for j in range(n):
             obj = obj + (sigma[i][j] * X[i] * X[j])
     M.setObjective(obj, GRB.MINIMIZE)
